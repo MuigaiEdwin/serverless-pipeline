@@ -8,33 +8,9 @@ A production-ready serverless data pipeline built entirely with Terraform. Recor
 
 ## Architecture
 
-```
-Producer (script/app)
-       │
-       │  PutRecord (JSON payload)
-       ▼
-┌─────────────────────┐
-│  Kinesis Data Stream │  ← 1 shard · 24-hr retention
-└─────────┬───────────┘
-          │  Event Source Mapping (batch up to 100)
-          ▼
-┌─────────────────────┐
-│    AWS Lambda        │  ← Python 3.12 · 128 MB
-│  ┌───────────────┐   │
-│  │  Data Masking  │   │  email · phone · SSN · name
-│  └───────────────┘   │
-└─────────┬───────────┘
-          │  PutItem (masked record)
-          ▼
-┌─────────────────────┐
-│     DynamoDB         │  ← On-demand billing · PITR enabled
-└─────────────────────┘
-
-All resources managed by Terraform │ Logs → CloudWatch (7-day retention)
-```
+![Architecture](./images/infrastructure.drawio.svg)
 
 ---!
----
 
 ## Why I Built This
 
