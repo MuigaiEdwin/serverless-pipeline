@@ -10,7 +10,6 @@ A production-ready serverless data pipeline built entirely with Terraform. Recor
 
 ![Architecture](./images/infrastructure.drawio.svg)
 
----!
 
 ## Why I Built This
 
