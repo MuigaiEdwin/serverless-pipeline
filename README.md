@@ -103,7 +103,7 @@ This project is designed to run at **$0** during development and testing.
 ### 1 — Clone the repo
 
 ```bash
-git clone https://github.com/github.com:MuigaiEdwin/serverless-pipeline.git
+git clone https://github.com/MuigaiEdwin/serverless-pipeline.git
 cd serverless-pipeline
 ```
 
