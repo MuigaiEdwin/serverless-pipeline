@@ -2,7 +2,7 @@
 
 > **Infrastructure as Code · Real-time Ingestion · Privacy by Design**
 
-A production-ready serverless data pipeline built entirely with Terraform. Records flow from a producer into **Amazon Kinesis**, get processed and **PII-masked** by **AWS Lambda**, then land in **DynamoDB** — all within the AWS Free Tier.
+A production-ready serverless data pipeline built entirely with Terraform. Records flow from a producer into **Amazon Kinesis**, get processed and **PII-masked** by **AWS Lambda**, then land in **DynamoDB** : all within the AWS Free Tier.
 
 ---
 
@@ -17,8 +17,8 @@ This project demonstrates three cloud engineering fundamentals that I wanted to 
 
 | Principle | Implementation |
 |---|---|
-| **Infrastructure as Code** | 100% Terraform — no console clicks, full drift detection |
-| **Data Security** | PII masked *before* persistence — plaintext never touches the database |
+| **Infrastructure as Code** | 100% Terraform > no console clicks, full drift detection |
+| **Data Security** | PII masked *before* persistence > plaintext never touches the database |
 | **Decoupled Architecture** | Producer and consumer are fully independent via Kinesis as the contract |
 
 ---
@@ -27,7 +27,7 @@ This project demonstrates three cloud engineering fundamentals that I wanted to 
 
 ```
 serverless-pipeline/
-├── main.tf                  # Root module — wires everything together
+├── main.tf                  # Root module > wires everything together
 ├── variables.tf             # Input variables with validation
 ├── outputs.tf               # Exposed resource names and ARNs
 ├── terraform.tfvars.example # Safe-to-commit variable template
@@ -76,21 +76,21 @@ This project is designed to run at **$0** during development and testing.
 
 ## Quick Start
 
-### 1 — Clone the repo
+### 1 > Clone the repo
 
 ```bash
 git clone https://github.com/MuigaiEdwin/serverless-pipeline.git
 cd serverless-pipeline
 ```
 
-### 2 — Configure variables
+### 2 > Configure variables
 
 ```bash
 cp terraform.tfvars.example terraform.tfvars
 # Edit terraform.tfvars if you want a different region or project name
 ```
 
-### 3 — Deploy
+### 3 > Deploy
 
 ```bash
 terraform init
@@ -108,7 +108,7 @@ Outputs:
   lambda_log_group     = "/aws/lambda/serverless-pipeline-processor"
 ```
 
-### 4 — Send test records
+### 4 > Send test records
 
 ```bash
 pip install boto3
@@ -119,7 +119,7 @@ python scripts/producer.py \
   --region us-east-1
 ```
 
-### 5 — Verify masking in DynamoDB
+### 5 > Verify masking in DynamoDB
 
 Open the AWS Console → DynamoDB → Tables → `serverless-pipeline-records` → Explore items.
 
@@ -137,13 +137,13 @@ You should see records like:
 }
 ```
 
-### 6 — Watch Lambda logs
+### 6 > Watch Lambda logs
 
 ```bash
 aws logs tail /aws/lambda/serverless-pipeline-processor --follow
 ```
 
-### 7 — Tear down when done
+### 7 > Tear down when done
 
 ```bash
 terraform destroy
@@ -153,7 +153,7 @@ terraform destroy
 
 ## Data Masking Rules
 
-The Lambda applies field-level masking based on key name matching — no schema required.
+The Lambda applies field-level masking based on key name matching > no schema required.
 
 | Field | Input | Masked Output |
 |---|---|---|
@@ -168,7 +168,7 @@ All other fields pass through unchanged.
 
 ## IAM Security Design
 
-The Lambda execution role follows **least-privilege** — it has exactly the permissions it needs and nothing more.
+The Lambda execution role follows **least-privilege** > it has exactly the permissions it needs and nothing more.
 
 ```
 Lambda Role
@@ -221,11 +221,11 @@ GitHub Actions runs automatically on every push and pull request:
 
 ## Possible Extensions
 
-- **Remote state** — add an S3 backend + DynamoDB state lock for team use
-- **Encryption** — enable KMS CMK on the Kinesis stream and DynamoDB table
-- **Dead-letter queue** — route failed Lambda records to an SQS DLQ
-- **Monitoring** — CloudWatch alarms on Lambda error rate and iterator age
-- **Schema validation** — JSON Schema check in Lambda before masking
+- **Remote state** > add an S3 backend + DynamoDB state lock for team use
+- **Encryption** > enable KMS CMK on the Kinesis stream and DynamoDB table
+- **Dead-letter queue** > route failed Lambda records to an SQS DLQ
+- **Monitoring** > CloudWatch alarms on Lambda error rate and iterator age
+- **Schema validation** > JSON Schema check in Lambda before masking
 
 ---
 
