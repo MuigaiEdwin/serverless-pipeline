@@ -37,11 +37,11 @@ module "dynamodb" {
 
 
 module "iam" {
-  source         = "./modules/iam"
-  project_name   = var.project_name
-  environment    = var.environment
-  kinesis_arn    = module.kinesis.stream_arn
-  dynamodb_arn   = module.dynamodb.table_arn
+  source       = "./modules/iam"
+  project_name = var.project_name
+  environment  = var.environment
+  kinesis_arn  = module.kinesis.stream_arn
+  dynamodb_arn = module.dynamodb.table_arn
 }
 
 
