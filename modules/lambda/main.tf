@@ -42,10 +42,10 @@ resource "aws_cloudwatch_log_group" "lambda_logs" {
 
 
 resource "aws_lambda_event_source_mapping" "kinesis_trigger" {
-  event_source_arn              = var.kinesis_stream_arn
-  function_name                 = aws_lambda_function.processor.arn
-  starting_position             = "LATEST"
-  batch_size                    = 100
+  event_source_arn               = var.kinesis_stream_arn
+  function_name                  = aws_lambda_function.processor.arn
+  starting_position              = "LATEST"
+  batch_size                     = 100
   bisect_batch_on_function_error = true
 
   depends_on = [aws_lambda_function.processor]
