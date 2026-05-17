@@ -4,7 +4,7 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "serverless-pipeline" {
+variable "project_name" {
   description = "Base name used across all resource names"
   type        = string
   default     = "serverless-pipeline"
