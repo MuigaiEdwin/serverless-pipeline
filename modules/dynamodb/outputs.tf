@@ -1,7 +1,7 @@
 output "table_name" {
-  value = aws_dynamodb_table.records.name
+  value = aws_dynamodb_table.this.name
 }
 
 output "table_arn" {
-  value = aws_dynamodb_table.records.arn
+  value = aws_dynamodb_table.this.arn
 }
